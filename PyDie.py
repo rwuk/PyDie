@@ -52,7 +52,7 @@ def engine():
 		maximum = minimum * sides		#Obtain the maximum integer
 		roll = dice(minimum , maximum)		#RNG call from lowest to highest numbers
 		total = roll + modifier			#Add any bonus'
-		output = "\nYour result was: %d\n\n%d (%d <-> %d) + %d\n" % (total ,roll, minimum, maximum, modifier)
+		output = "\nYour result was: %d\n%d (%d <-> %d) + %d\n" % (total ,roll, minimum, maximum, modifier)
 		print output
 		log.write(output)
 		print "1:) Roll some more dice."
