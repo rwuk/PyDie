@@ -23,7 +23,7 @@ def erase():						#Wipe the log file
 def view():						#Access the log file
 	log.seek(0)
 	print log.read()
-	print "\n1:) Roll some more Dice."
+	print "1:) Roll some more Dice."
 	print "2:) Erase the log and roll some more Dice."
 	print "3:) Exit PyDie."
 	choice = raw_input("What would you like to do? > ")
