@@ -1,9 +1,9 @@
-import sys								#PyDie
-import os								#Please make sure you have a file called
-import random							#log.txt in the same folder as this script
+import sys							#PyDie
+import os							
+import random							
 
 def dice(a, b):							#RNG function - emulates the dice roll
-	roll = random.randint(a, b)			#a = lowest integer, b = highest integer
+	roll = random.randint(a, b)				#a = lowest integer, b = highest integer
 	return roll
 
 def clear_screen():						#Clear Screen function - OS Specific
@@ -22,7 +22,7 @@ def erase():							#Wipe the log file
 	user_response = True
 	return user_response
 
-def view():								#Access the log file
+def view():							#Access the log file
 	log.seek(0)
 	print log.read()
 	print "1:) Roll some more Dice."
@@ -45,14 +45,14 @@ def view():								#Access the log file
 
 def engine():
 	user_response = True				#Variable to control the while loop
-	while user_response == True:		#Check if variable is true
+	while user_response == True:			#Check if variable is true
 		clear_screen()
 		print " ---------- PyDie ---------- "
-		sides = int(raw_input("How many sides on your dice? > "))		#user input to
+		sides = int(raw_input("How many sides on your dice? > "))	#user input to
 		minimum = int(raw_input("How many dice are you rolling? > "))	#configure variables
 		modifier = int(raw_input("Is there any bonus to the roll? > "))	#for the dice roll
 		maximum = minimum * sides		#Obtain the maximum integer
-		roll = dice(minimum , maximum)	#RNG call from lowest to highest numbers
+		roll = dice(minimum , maximum)		#RNG call from lowest to highest numbers
 		total = roll + modifier			#Add any bonus'
 		output = "\nYour result was: %d\n%d (%d <-> %d) + %d\n" % (total ,roll, minimum, maximum, modifier)
 		print output
@@ -76,9 +76,9 @@ def engine():
 			raw_input("Press Return to continue.")
 			
 
-create_log = open('log.txt', 'a') 
-create_log.close()
-log = open('log.txt', 'r+')
+create_log = open('log.txt', 'a')	#Create the log if it doesn't exist
+create_log.close()			#Must be a better way to do this
+log = open('log.txt', 'r+')	
 erase()
 engine()
 clear_screen()
