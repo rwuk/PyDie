@@ -10,7 +10,7 @@ def clear_screen():						#Clear Screen function - OS Specific
 	if sys.platform == 'linux2' or sys.platform == 'linux':
 		os.system('clear')				
 	elif sys.platform == 'darwin':
-		os.system('clear'0
+		os.system('clear')
 	elif sys.platform == 'win32':
 		os.system('cls')
 	else:
