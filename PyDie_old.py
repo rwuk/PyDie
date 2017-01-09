@@ -1,4 +1,4 @@
-import sys								#PyDie
+import sys								#PyDie for python 2.7*
 import os								#Please make sure you have a file called
 import random							#log.txt in the same folder as this script
 
