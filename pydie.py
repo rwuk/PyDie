@@ -1,40 +1,48 @@
-import sys								#PyDie for python 3.*
-import os								#Please make sure you have a file called
-import random							#log.txt in the same folder as this script
+import sys, os, random						#PyDie - A Python Dice Box
 
-def dice(a, b):							#RNG function - emulates the dice roll
-	roll = random.randint(a, b)			#a = lowest integer, b = highest integer
-	return roll
+def dice(a, b,):						#Rolls The Dice
+	total = 0
+	while b >= 1:
+		roll = random.randint(1, a)
+		b = b - 1
+		total = total + roll
+	return total
 
 def clear_screen():						#Clear Screen function - OS Specific
 	if sys.platform == 'linux2' or sys.platform == 'linux':
-		os.system('clear')				
+		os.system('clear')
 	elif sys.platform == 'darwin':
 		os.system('clear')
 	elif sys.platform == 'win32':
 		os.system('cls')
 	else:
 		print("\n") * 5
-		
-def fail():
+
+def fail():							#Fail Checker
 	print("You fucked up Shitlord.")
 	input("Press Return to continue.")
-	
-		
+
+def int_check(a):						#Check user input is an integer
+	check = a.isdigit()
+	if check == True:
+		return int(a)
+	else:
+		fail()
+		engine()
+
 def erase():							#Wipe the log file
 	log.seek(0)
 	log.truncate()
 	user_response = True
 	return user_response
 
-def view():								#Access the log file
+def view():							#Access the log file
 	log.seek(0)
 	print(log.read())
 	print("1:) Roll some more Dice.")
 	print("2:) Erase the log and roll some more Dice.")
 	print("3:) Exit PyDie.")
 	choice = str(input("What would you like to do? > "))
-	
 	if choice == "1":
 		user_response = True
 	elif choice == "2":
@@ -44,29 +52,31 @@ def view():								#Access the log file
 	else:
 		user_response = True
 		fail()
-		
 	return user_response
 
-def engine():
-	user_response = True				#Variable to control the while loop
-	while user_response == True:		#Check if variable is true
+def engine():							#Main program loop
+	user_response = True
+	while user_response == True:
 		clear_screen()
 		print(" ---------- PyDie ---------- ")
-		sides = int(input("How many sides on your dice? > "))		#user input to
-		minimum = int(input("How many dice are you rolling? > "))	#configure variables
-		modifier = int(input("Is there any bonus to the roll? > "))	#for the dice roll
-		maximum = minimum * sides		#Obtain the maximum integer
-		roll = dice(minimum , maximum)	#RNG call from lowest to highest numbers
-		total = roll + modifier			#Add any bonus'
-		output = "\nYour result was: %d\n%d (%d <-> %d) + %d\n" % (total ,roll, minimum, maximum, modifier)
+		sides = str(input("How many sides on your dice? > "))
+		sides = int_check(sides)
+		minimum = str(input("How many dice are you rolling? > "))
+		minimum = int_check(minimum)
+		modifier = str(input("Is there any bonus to the roll? > "))
+		modifier = int_check(modifier)
+		maximum = minimum * sides
+		roll = dice(sides, minimum)
+		total = roll + modifier
+		output = "\nYour result was: %d\n%d (+%d) on %dd%d\n" % (
+			total, roll, modifier, minimum, sides)
 		print(output)
 		log.write(output)
 		print("1:) Roll some more dice.")
 		print("2:) View the log.")
 		print("3:) Wipe the log.")
 		print("4:) Exit PyDie.")
-		response = str(input("What would you like to do? > "))	#What ya wanna do?
-		
+		response = str(input("What would you like to do? > "))
 		if response == "1":
 			user_response = True
 		elif response == "2":
@@ -77,9 +87,8 @@ def engine():
 			user_response = False
 		else:
 			fail()
-			
 
-create_log = open('log.txt', 'a') 
+create_log = open('log.txt', 'a')
 create_log.close()
 log = open('log.txt', 'r+')
 erase()
@@ -87,4 +96,3 @@ engine()
 clear_screen()
 print("Thank you for using PyDie!")
 log.close()
-
