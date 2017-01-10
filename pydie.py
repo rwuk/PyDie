@@ -6,6 +6,10 @@ def header():							#Graphical Header
 def cont():								#Function to continue
 	input("Press Return to continue...")
 
+def fail():								#Fail Checker
+	print("You fucked up Shitlord.")
+	cont()
+
 def dice(a, b,):						#Rolls The Dice
 	total = 0
 	while b >= 1:
@@ -32,29 +36,31 @@ def clear_screen():						#Clear Screen function - OS Specific
 	else:
 		print("\n") * 5
 
-def fail():								#Fail Checker
-	print("You fucked up Shitlord.")
-	cont()
-	menu()
-
-def view():								#Access the log file
+def view(a):							#Access the log file
 	clear_screen()
 	header()
-	log.seek(0)
-	print(log.read())
+	if a == True:
+		log.seek(0)
+		print(log.read())
+	else:
+		for i in log:
+			print(i)
 	cont()
 	clear_screen()
 	menu()
 
-def erase():
-	clear_screen()						#Wipe the log file
+def erase(a):							#Wipe the log file
+	clear_screen()
 	header()
 	user_response = str(input(
 		"Are you sure you want to wipe the log file? (y/n) >"))
 	if user_response == "Y" or user_response == "y":
 		print("Wiping the log.")
-		log.seek(0)
-		log.truncate()
+		if a == True:
+			log.seek(0)
+			log.truncate()
+		else:
+			del log[:]
 		cont()
 		menu()
 	elif user_response == "N" or user_response == "n":
@@ -63,6 +69,7 @@ def erase():
 		menu()
 	else:
 		fail()
+		menu()
 
 def menu():								#Menu System
 	clear_screen()
@@ -73,17 +80,18 @@ def menu():								#Menu System
 	print("4:) Exit PyDie.")
 	response = str(input("\nWhat would you like to do? > "))
 	if response == "1":
-		engine()
+		engine(user_log)
 	elif response == "2":
-		view()
+		view(user_log)
 	elif response == "3":
-		erase()
+		erase(user_log)
 	elif response == "4":
-		close()
+		close(user_log)
 	else:
 		fail()
+		menu()
 
-def engine():							#Main program loop
+def engine(a):							#Main program loop
 	clear_screen()
 	header()
 	sides = str(input("How many sides on your dice? > "))
@@ -98,20 +106,42 @@ def engine():							#Main program loop
 	output = "Your result was: %d\n%d (+%d) on %dd%d\n" % (
 		total, roll, modifier, minimum, sides)
 	print("\n" + output)
-	log.write(output)
-	log.write("\n")
+	if a == True:
+		log.write(output)
+		log.write("\n")
+	else:
+		log.append(output)
 	cont()
 	menu()
 
-def close():							#Close PyDie
+def close(a):							#Close PyDie
 	clear_screen()
 	header()
 	print("Thank you for using PyDie!")
 	cont()
 	clear_screen()
-	log.close()
+	if a == True:
+		log.close()
+	else:
+		a == False
 
-create_log = open('log.txt', 'a')
-create_log.close()
-log = open('log.txt', 'r+')
-menu()
+clear_screen()
+header()
+user_log = str(input("Would ou like to use a persistent log file? (y/n) >"))
+if user_log == "Y" or user_log == "y":
+	user_log = True
+	print("Creating the log file.")
+	create_log = open('log.txt', 'a')
+	create_log.close()
+	log = open('log.txt', 'r+')
+	cont()
+	menu()
+elif user_log == "N" or user_log == "n":
+	user_log = False
+	print("The log will not be persistent.")
+	log = []
+	cont()
+	menu()
+else:
+	fail()
+	close(user_log)
