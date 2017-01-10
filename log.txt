@@ -1,1 +1,1 @@
-This file will be created and modified by the script and is used for logging
+This file will be created and modified by the script, it is used for persistent result logging.
