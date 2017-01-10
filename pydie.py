@@ -23,8 +23,7 @@ def int_check(a):						#Check user input is an integer
 	if check == True:
 		return int(a)
 	else:
-		fail()
-		menu()
+		return False
 
 def clear_screen():						#Clear Screen function - OS Specific
 	if sys.platform == 'linux2' or sys.platform == 'linux':
@@ -96,23 +95,35 @@ def engine(a):							#Configure dice & write to log
 	header()
 	sides = str(input("How many sides on your dice? > "))
 	sides = int_check(sides)
-	minimum = str(input("How many dice are you rolling? > "))
-	minimum = int_check(minimum)
-	modifier = str(input("Is there any bonus to the roll? > "))
-	modifier = int_check(modifier)
-	maximum = minimum * sides
-	roll = dice(sides, minimum)
-	total = roll + modifier
-	output = "Your result was: %d\n%d (+%d) on %dd%d\n" % (
-		total, roll, modifier, minimum, sides)
-	print("\n" + output)
-	if a == True:
-		log.write(output)
-		log.write("\n")
+	if sides == False:
+		fail()
+		menu()
 	else:
-		log.append(output)
-	cont()
-	menu()
+		minimum = str(input("How many dice are you rolling? > "))
+		minimum = int_check(minimum)
+		if minimum == False:
+			fail()
+			menu()
+		else:
+			modifier = str(input("Is there any bonus to the roll? > "))
+			modifier = int_check(modifier)
+			if modifier == False:
+				fail()
+				menu()
+			else:
+				maximum = minimum * sides
+				roll = dice(sides, minimum)
+				total = roll + modifier
+				output = "Your result was: %d\n%d (+%d) on %dd%d\n" % (
+					total, roll, modifier, minimum, sides)
+				print("\n" + output)
+				if a == True:
+					log.write(output)
+					log.write("\n")
+				else:
+					log.append(output)
+					cont()
+					menu()
 
 def close(a):							#Close PyDie
 	clear_screen()
