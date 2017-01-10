@@ -1,9 +1,7 @@
 # PyDie
 
-A Python dice box
+A Python dice box with a result log.
 
-This script creates a log file called log.txt.
+If using the persistent log a file called log.txt will be created in the script directory.
 
-The file should auto-create if it doesn't exists, but you'll need write permissions in the folder to run it.
-
-Android is shitting a brick over the log file currently, this is almost certainly permissions related.
+If you do not have permission to create a file in the same directory that PyDie.py is located use the non-persistent log.
