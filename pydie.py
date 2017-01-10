@@ -91,7 +91,7 @@ def menu():								#Menu System
 		fail()
 		menu()
 
-def engine(a):							#Main program loop
+def engine(a):							#Configure dice & write to log
 	clear_screen()
 	header()
 	sides = str(input("How many sides on your dice? > "))
