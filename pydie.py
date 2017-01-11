@@ -120,6 +120,8 @@ def engine(a):							#Configure dice & write to log
 				if a == True:
 					log.write(output)
 					log.write("\n")
+					cont()
+					menu()
 				else:
 					log.append(output)
 					cont()
