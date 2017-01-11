@@ -52,7 +52,7 @@ def erase(a):							#Wipe the log file
 	clear_screen()
 	header()
 	user_response = str(input(
-		"Are you sure you want to wipe the log file? (y/n) >"))
+		"Are you sure you want to wipe the log file? (y/n) > "))
 	if user_response == "Y" or user_response == "y":
 		print("Wiping the log.")
 		if a == True:
@@ -140,7 +140,7 @@ def close(a):							#Close PyDie
 
 clear_screen()
 header()
-user_log = str(input("Would ou like to use a persistent log file? (y/n) >"))
+user_log = str(input("Would ou like to use a persistent log file? (y/n) > "))
 if user_log == "Y" or user_log == "y":
 	user_log = True
 	print("Creating the log file.")
