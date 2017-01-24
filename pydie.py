@@ -51,8 +51,8 @@ def view(a):							#Access the log file
 def erase(a):							#Wipe the log file
 	clear_screen()
 	header()
-	user_response = str(input(
-		"Are you sure you want to wipe the log file? (y/n) > "))
+	user_response = input(
+		"Are you sure you want to wipe the log file? (y/n) > ")
 	if user_response == "Y" or user_response == "y":
 		print("Wiping the log.")
 		if a == True:
@@ -77,7 +77,7 @@ def menu():								#Menu System
 	print("2:) View the log.")
 	print("3:) Wipe the log.")
 	print("4:) Exit PyDie.")
-	response = str(input("\nWhat would you like to do? > "))
+	response = input("\nWhat would you like to do? > ")
 	if response == "1":
 		engine(user_log)
 	elif response == "2":
@@ -93,19 +93,19 @@ def menu():								#Menu System
 def engine(a):							#Configure dice & write to log
 	clear_screen()
 	header()
-	sides = str(input("How many sides on your dice? > "))
+	sides = input("How many sides on your dice? > ")
 	sides = int_check(sides)
 	if sides == False:
 		fail()
 		menu()
 	else:
-		minimum = str(input("How many dice are you rolling? > "))
+		minimum = input("How many dice are you rolling? > ")
 		minimum = int_check(minimum)
 		if minimum == False:
 			fail()
 			menu()
 		else:
-			modifier = str(input("Is there any bonus to the roll? > "))
+			modifier = input("Is there any bonus to the roll? > ")
 			modifier = int_check(modifier)
 			if modifier == False:
 				fail()
@@ -140,7 +140,7 @@ def close(a):							#Close PyDie
 
 clear_screen()
 header()
-user_log = str(input("Would ou like to use a persistent log file? (y/n) > "))
+user_log = input("Would ou like to use a persistent log file? (y/n) > ")
 if user_log == "Y" or user_log == "y":
 	user_log = True
 	print("Creating the log file.")
