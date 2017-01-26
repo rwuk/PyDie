@@ -19,7 +19,7 @@ def dice(a, b,):						#Rolls The Dice
 	return total
 
 def int_check(a):						#Check user input is an integer
-	check = a.isdigit()
+	check = a.lstrip("-").isdigit()
 	if check == True:
 		return int(a)
 	else:
@@ -114,7 +114,7 @@ def engine(a):							#Configure dice & write to log
 				maximum = minimum * sides
 				roll = dice(sides, minimum)
 				total = roll + modifier
-				output = "Your result was: %d\n%d (+%d) on %dd%d\n" % (
+				output = "Your result was: %d\n%d +(%d) on %dd%d\n" % (
 					total, roll, modifier, minimum, sides)
 				print("\n" + output)
 				if a == True:
