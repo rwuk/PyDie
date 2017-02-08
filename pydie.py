@@ -15,7 +15,7 @@ def dice(a, b,):						#Rolls The Dice
 	while b >= 1:
 		roll = random.randint(1, a)
 		b = b - 1
-		total = total + roll
+		total += roll
 	return total
 
 def int_check(a):						#Check user input is an integer
