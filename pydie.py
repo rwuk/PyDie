@@ -141,15 +141,15 @@ def close(a):							#Close PyDie
 clear_screen()
 header()
 user_log = input("Would ou like to use a persistent log file? (y/n) > ")
-if user_log == "Y" or user_log == "y":
+if 	str(user_log.upper):
 	user_log = True
-	print("Creating the log file.")
 	create_log = open('log.txt', 'a')
 	create_log.close()
+	print("Creating the %s file.")% create_log
 	log = open('log.txt', 'r+')
 	cont()
 	menu()
-elif user_log == "N" or user_log == "n":
+elif	str(user_log.upper):
 	user_log = False
 	print("The log will not be persistent.")
 	log = []
